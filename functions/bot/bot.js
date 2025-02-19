@@ -24,8 +24,7 @@ const messages = {
 
 // Function to get folders in the public/promo directory
 const getFolders = () => {
-  const promoPath = path.join(__dirname, 'public', 'promos');
-  return fs.readdirSync(promoPath).filter(file => {
+  return fs.readdirSync('../../public/promos').filter(file => {
     return fs.statSync(path.join(promoPath, file)).isDirectory();
   });
 };

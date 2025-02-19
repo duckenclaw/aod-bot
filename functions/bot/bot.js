@@ -1,4 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
+const path = require('path');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -24,10 +25,12 @@ const messages = {
 
 // Function to get folders in the public/promo directory
 const getFolders = () => {
-  return fs.readdirSync('../../public/promos').filter(file => {
+  const promoPath = path.resolve(__dirname, '..', '..', 'public', 'promos'); 
+  return fs.readdirSync(promoPath).filter(file => {
     return fs.statSync(path.join(promoPath, file)).isDirectory();
   });
 };
+
 
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, messages.start, {

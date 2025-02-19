@@ -4,7 +4,13 @@ const path = require('path');
 require('dotenv').config();
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token);
+
+exports.handler = async (event) => {
+  const body = JSON.parse(event.body);
+  bot.processUpdate(body);
+  return { statusCode: 200, body: "OK" };
+};
 
 const targetChannelId = process.env.TARGET_CHANNEL_ID;
 
@@ -140,13 +146,3 @@ bot.onText(/\/menu/, (msg) => {
     }
   });
 });
-
-exports.handler = async event => {
-  try {
-    await bot.handleUpdate(JSON.parse(event.body))
-    return { statusCode: 200, body: "" }
-  } catch (e) {
-    console.error("error in handler:", e)
-    return { statusCode: 400, body: "This endpoint is meant for bot and telegram communication" }
-  }
-}

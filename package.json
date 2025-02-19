@@ -2,9 +2,9 @@
   "name": "telegram-bot",
   "version": "1.0.0",
   "description": "A Telegram bot that forwards messages to a channel.",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node bot.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {

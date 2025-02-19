@@ -1,11 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
 const path = require('path');
 const fs = require('fs');
-const path = require('path');
 require('dotenv').config();
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
-const bot = new TelegramBot(token);
+const bot = new TelegramBot(token, { polling: true });
 
 exports.handler = async (event) => {
   const body = JSON.parse(event.body);
@@ -25,7 +24,7 @@ const messages = {
 
 // Function to get folders in the public/promo directory
 const getFolders = () => {
-  const promoPath = path.resolve(__dirname, '..', '..', 'public', 'promos'); 
+  const promoPath = path.resolve(__dirname, 'promos'); 
   return fs.readdirSync(promoPath).filter(file => {
     return fs.statSync(path.join(promoPath, file)).isDirectory();
   });
@@ -77,12 +76,12 @@ bot.on('callback_query', async (query) => {
     newKeyboard = [];
   } else {
     // Handle folder selection
-    const folderPath = path.join(__dirname, 'public', 'promos', query.data);
+    const folderPath = path.join(__dirname, 'promos', query.data);
     const files = fs.readdirSync(folderPath);
 
     // Find the required files
     const startPromoMd = files.find(file => file === 'start-promo.md');
-    const promoMd = files.find(file => file === 'promo.md');
+    const promoMd = files.find(file => file === 'promo.html');
     const promoJpg = files.find(file => file === 'promo.jpg');
     const mp3File = files.find(file => file.endsWith('.mp3'));
 
@@ -95,7 +94,7 @@ bot.on('callback_query', async (query) => {
 
     if (promoMd) {
       const promoContent = fs.readFileSync(path.join(folderPath, promoMd), 'utf8');
-      await bot.sendMessage(chatId, promoContent, { parse_mode: 'Markdown' });
+      await bot.sendMessage(chatId, promoContent, { parse_mode: 'HTML' });
     }
 
     if (mp3File) {

@@ -43,18 +43,21 @@ bot.on('callback_query', async (query) => {
     [{ text: 'Аннотация', callback_data: 'annotation' }],
     [{ text: 'Меню', callback_data: 'menu' }]
   ];
-
   if (query.data === 'annotation') {
     newText = messages.annotation;
     newKeyboard = [
-      [{ text: 'Прочитать предупреждение', callback_data: 'read_warning' }],
-      [{ text: 'Пропустить предупреждение', callback_data: 'skip_warning' }]
+      [{ text: 'Отлично', callback_data: 'menu' }],
     ];
-  } else if (query.data === 'menu') {
-    newText = messages.warning1 + messages.warningChoice;
+  } else if (query.data === 'menu') {;
+    newText = messages.warning1;
+    newKeyboard = [
+      [{ text: 'Ура!', callback_data: 'hooray' }],
+    ];
+  } else if (query.data === 'hooray') {
+    newText = messages.warningChoice;
     newKeyboard = [
       [{ text: 'Прочитать', callback_data: 'read_warning' }],
-      [{ text: 'Нет\, спасибо', callback_data: 'skip_warning' }]
+      [{ text: 'Пропустить', callback_data: 'skip_warning' }],
     ];
   } else if (query.data === 'read_warning') {
     newText = messages.warning2;

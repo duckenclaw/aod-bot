@@ -4,7 +4,7 @@ const fs = require('fs');
 require('dotenv').config();
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
-const bot = new TelegramBot(token);
+const bot = new TelegramBot(token, {polling: true});
 
 exports.handler = async (event) => {
   const body = JSON.parse(event.body);

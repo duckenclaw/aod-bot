@@ -4,8 +4,8 @@
   "description": "A Telegram bot that forwards messages to a channel.",
   "main": "functions/bot/bot.js",
   "scripts": {
-    "start": "node functions/bot/bot.js",
-    "dev": "nodemon functions/bot/bot.js"
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

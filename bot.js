@@ -141,6 +141,10 @@ bot.on('message', (msg) => {
 bot.onText(/\/menu/, (msg) => {
   const folders = getFolders();
   const folderButtons = folders.map(folder => [{ text: folder, callback_data: folder }]);
+    // Добавляем кнопку с ссылкой на канал
+    folderButtons.push([
+      { text: 'Перейти в канал с материалами', url: 'https://t.me/+akK9sc-CH2c0MjAy' }
+    ]);
   bot.sendMessage(msg.chat.id, 'Выберите главу:', {
     reply_markup: {
       inline_keyboard: folderButtons

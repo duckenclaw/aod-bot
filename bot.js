@@ -127,7 +127,7 @@ bot.on('message', (msg) => {
   const text = msg.text;
 
   if ((msg.chat.type === 'private') && !(msg.text.startsWith("/"))) {
-    bot.sendMessage(targetChannelId, `New message from @${msg.from.username}: ${text}`, {parse_mode: "HTML"})
+    bot.sendMessage(targetChannelId, `Новый отзыв: ${text}`, {parse_mode: "HTML"})
       .then(() => {
         console.log(`Message forwarded to channel ${targetChannelId}: ${text}`);
       })

@@ -87,9 +87,7 @@ bot.on('callback_query', async (query) => {
 
     if (startPromoMd) {
       const startPromoContent = fs.readFileSync(path.join(folderPath, startPromoMd), 'utf8');
-      await bot.sendMessage(chatId, startPromoContent, {
-        parse_mode: "Markdown",
-      });
+      await bot.sendMessage(chatId, startPromoContent, { parse_mode: "Markdown" });
     }
 
     if (promoMd) {

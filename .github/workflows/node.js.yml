@@ -27,4 +27,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run start
+    - name: Start the bot
+      run: npm run start
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TARGET_CHANNEL_ID: ${{ secrets.TARGET_CHANNEL_ID }}
